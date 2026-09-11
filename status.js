@@ -3,7 +3,7 @@
   const players = document.getElementById('server-players');
   const version = document.getElementById('server-version');
   const checked = document.getElementById('server-checked');
-  const url = 'https://raw.githubusercontent.com/ristoraud/valheim.ork.ee/server-status/status.json';
+  const url = 'https://farlands-status.onrender.com/status';
   let busy = false;
   let snapshot = null;
 
@@ -24,7 +24,7 @@
     if (busy) return;
     busy = true;
     try {
-      const response = await fetch(`${url}?t=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(8000) });
+      const response = await fetch(`${url}?t=${Date.now()}`, { cache: 'no-store', signal: AbortSignal.timeout(60000) });
       if (!response.ok) throw new Error('Status unavailable');
       const data = await response.json();
       render(data);
