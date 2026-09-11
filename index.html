@@ -21,25 +21,25 @@
       pointer-events: none;
       z-index: 0;
       /* Keep the title clear while fog drifts over the map below it. */
-      mask-image: linear-gradient(transparent 8%, #0006 30%, #000 60%);
-      -webkit-mask-image: linear-gradient(transparent 8%, #0006 30%, #000 60%);
+      mask-image: linear-gradient(transparent 3%, #0009 20%, #000 45%);
+      -webkit-mask-image: linear-gradient(transparent 3%, #0009 20%, #000 45%);
     }
     .mist-layer {
       position: absolute;
       inset: -15% -55%;
       background:
-        radial-gradient(ellipse 19% 9% at 16% 52%, #fff6, transparent 100%),
-        radial-gradient(ellipse 24% 12% at 39% 65%, #ffffff52, transparent 100%),
-        radial-gradient(ellipse 18% 8% at 61% 48%, #ffffff47, transparent 100%),
-        radial-gradient(ellipse 26% 13% at 83% 77%, #ffffff5c, transparent 100%);
-      filter: blur(22px);
-      opacity: .55;
+        radial-gradient(ellipse 22% 11% at 14% 48%, #ffffffa8, transparent 100%),
+        radial-gradient(ellipse 28% 14% at 38% 64%, #ffffff8f, transparent 100%),
+        radial-gradient(ellipse 23% 11% at 62% 46%, #ffffff7a, transparent 100%),
+        radial-gradient(ellipse 31% 16% at 84% 76%, #ffffff9c, transparent 100%);
+      filter: blur(16px);
+      opacity: .82;
       animation: mist-drift 75s ease-in-out infinite alternate;
       will-change: transform;
     }
     .mist-layer:nth-child(2) {
       inset: -5% -65%;
-      opacity: .3;
+      opacity: .52;
       animation-duration: 110s;
       animation-delay: -48s;
       animation-direction: alternate-reverse;
