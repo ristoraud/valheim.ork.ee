@@ -21,33 +21,33 @@
       pointer-events: none;
       z-index: 0;
       /* Keep the title clear while fog drifts over the map below it. */
-      mask-image: linear-gradient(transparent 3%, #0009 20%, #000 45%);
-      -webkit-mask-image: linear-gradient(transparent 3%, #0009 20%, #000 45%);
+      mask-image: linear-gradient(transparent 0%, #000c 12%, #000 30%);
+      -webkit-mask-image: linear-gradient(transparent 0%, #000c 12%, #000 30%);
     }
     .mist-layer {
       position: absolute;
       inset: -15% -55%;
       background:
-        radial-gradient(ellipse 22% 11% at 14% 48%, #ffffffa8, transparent 100%),
-        radial-gradient(ellipse 28% 14% at 38% 64%, #ffffff8f, transparent 100%),
-        radial-gradient(ellipse 23% 11% at 62% 46%, #ffffff7a, transparent 100%),
-        radial-gradient(ellipse 31% 16% at 84% 76%, #ffffff9c, transparent 100%);
-      filter: blur(16px);
-      opacity: .82;
-      animation: mist-drift 75s ease-in-out infinite alternate;
+        radial-gradient(ellipse 27% 15% at 12% 42%, #ffffffe6, transparent 85%),
+        radial-gradient(ellipse 34% 18% at 38% 62%, #ffffffd4, transparent 88%),
+        radial-gradient(ellipse 29% 15% at 64% 43%, #ffffffc7, transparent 85%),
+        radial-gradient(ellipse 38% 21% at 87% 72%, #ffffffdc, transparent 88%);
+      filter: blur(12px);
+      opacity: .96;
+      animation: mist-drift 28s ease-in-out infinite alternate;
       will-change: transform;
     }
     .mist-layer:nth-child(2) {
       inset: -5% -65%;
-      opacity: .52;
-      animation-duration: 110s;
-      animation-delay: -48s;
+      opacity: .75;
+      animation-duration: 42s;
+      animation-delay: -19s;
       animation-direction: alternate-reverse;
       transform: scaleY(-1);
     }
     @keyframes mist-drift {
-      from { transform: translate3d(-14%, 3%, 0); }
-      to { transform: translate3d(14%, -4%, 0); }
+      from { transform: translate3d(-22%, 5%, 0); }
+      to { transform: translate3d(22%, -7%, 0); }
     }
     main { position: relative; z-index: 1; min-height: 100svh; display: grid; place-items: center; padding: 24px; }
     .enter {
