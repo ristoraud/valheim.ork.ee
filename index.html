@@ -60,7 +60,7 @@
       100% { opacity: 0; filter: brightness(1.4) blur(14px); transform: scale(1.12) translateY(-8px); }
     }
     .enter:active { transform: translateY(1px); }
-    .enter:focus-visible, summary:focus-visible { outline: 3px solid #fff2cb; outline-offset: 8px; }
+    .enter:focus-visible { outline: 3px solid #fff2cb; outline-offset: 8px; }
     .help {
       position: fixed;
       bottom: max(18px, env(safe-area-inset-bottom));
@@ -75,10 +75,10 @@
       font: 14px/1.6 system-ui, sans-serif;
       box-shadow: 0 3px 18px #0005;
     }
-    summary { cursor: pointer; color: #e9d6ae; }
-    .help p { margin: 10px 0 0; }
+
+
     code { color: #ffe7ad; user-select: all; overflow-wrap: anywhere; }
-    .help a { color: #ffe7ad; }
+
     @media (prefers-reduced-motion: reduce) {
       .enter, .enter::before, .enter::after { transition: none; }
       .enter.departing { animation: none; }
@@ -90,12 +90,7 @@
   <main aria-label="Farlands — Valheimi server">
     <a class="enter" href="steam://run/892970//+connect%2083.143.117.49:20414/" aria-label="Sisene Farlandsi serverisse Steami kaudu">Sisene</a>
   </main>
-  <details class="help" id="help">
-    <summary>Steam ei avane?</summary>
-    <p>Luba brauseril Steam avada. Arvutisse peavad olema paigaldatud Steam ja Valheim.</p>
-    <p><a href="steam://run/892970//+connect%2083.143.117.49:20414/">Ava Steam uuesti</a></p>
-    <p>Või ava Valheim käsitsi, vali tegelane ning liitu serveriga aadressil <code>83.143.117.49:20414</code>. Kui küsitakse parooli, sisesta serveri parool.</p>
-  </details>
+  <div class="help">IP: <code>83.143.117.49:20414</code></div>
   <script>
     const enter = document.querySelector('.enter');
     let launching = false;
@@ -108,7 +103,7 @@
       enter.setAttribute('aria-disabled', 'true');
       const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650;
       window.setTimeout(() => {
-        // The direct retry link remains available if a browser blocks delayed app launches.
+        // Restore the button so the user can retry launching Steam.
         window.setTimeout(() => {
           enter.classList.remove('departing');
           enter.removeAttribute('aria-disabled');
@@ -120,4 +115,5 @@
   </script>
 </body>
 </html>
+
 
