@@ -14,7 +14,42 @@
       color: #fff2d3;
       font-family: Georgia, 'Times New Roman', serif;
     }
-    main { min-height: 100svh; display: grid; place-items: center; padding: 24px; }
+    .mist {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: 0;
+      /* Keep the title clear while fog drifts over the map below it. */
+      mask-image: linear-gradient(transparent 8%, #0006 30%, #000 60%);
+      -webkit-mask-image: linear-gradient(transparent 8%, #0006 30%, #000 60%);
+    }
+    .mist-layer {
+      position: absolute;
+      inset: -15% -55%;
+      background:
+        radial-gradient(ellipse 19% 9% at 16% 52%, #fff6, transparent 100%),
+        radial-gradient(ellipse 24% 12% at 39% 65%, #ffffff52, transparent 100%),
+        radial-gradient(ellipse 18% 8% at 61% 48%, #ffffff47, transparent 100%),
+        radial-gradient(ellipse 26% 13% at 83% 77%, #ffffff5c, transparent 100%);
+      filter: blur(22px);
+      opacity: .55;
+      animation: mist-drift 75s ease-in-out infinite alternate;
+      will-change: transform;
+    }
+    .mist-layer:nth-child(2) {
+      inset: -5% -65%;
+      opacity: .3;
+      animation-duration: 110s;
+      animation-delay: -48s;
+      animation-direction: alternate-reverse;
+      transform: scaleY(-1);
+    }
+    @keyframes mist-drift {
+      from { transform: translate3d(-14%, 3%, 0); }
+      to { transform: translate3d(14%, -4%, 0); }
+    }
+    main { position: relative; z-index: 1; min-height: 100svh; display: grid; place-items: center; padding: 24px; }
     .enter {
       position: relative;
       display: inline-flex;
@@ -62,6 +97,7 @@
     .enter:active { transform: translateY(1px); }
     .enter:focus-visible { outline: 3px solid #fff2cb; outline-offset: 8px; }
     .help {
+      z-index: 2;
       position: fixed;
       bottom: max(18px, env(safe-area-inset-bottom));
       left: 50%;
@@ -80,6 +116,7 @@
     code { color: #ffe7ad; user-select: all; overflow-wrap: anywhere; }
 
     @media (prefers-reduced-motion: reduce) {
+      .mist-layer { animation: none; will-change: auto; }
       .enter, .enter::before, .enter::after { transition: none; }
       .enter.departing { animation: none; }
     }
@@ -87,6 +124,7 @@
   </style>
 </head>
 <body>
+  <div class="mist" aria-hidden="true"><div class="mist-layer"></div><div class="mist-layer"></div></div>
   <main aria-label="Farlands — Valheimi server">
     <a class="enter" href="steam://run/892970//+connect%2083.143.117.49:20414/" aria-label="Sisene Farlandsi serverisse Steami kaudu">Sisene</a>
   </main>
