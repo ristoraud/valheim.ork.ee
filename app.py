@@ -72,3 +72,9 @@ def health():
 @app.get("/status")
 def status():
     return jsonify(get_status())
+
+ALLOWED_ORIGINS = {
+    "https://valheim.ork.ee",
+    "https://www.valheim.ork.ee",
+    "https://valheim-ork-ee.pages.dev",
+}
