@@ -1,0 +1,21 @@
+name: Farlands server status
+on:
+  schedule:
+    - cron: '7,17,27,37,47,57 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: farlands-server-status
+  cancel-in-progress: false
+jobs:
+  query:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - uses: actions/checkout@v4
+      - name: Query server and publish snapshot
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_STATUS: '1'
+        run: python3 scripts/server_status.py
