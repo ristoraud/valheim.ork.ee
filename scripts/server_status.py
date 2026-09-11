@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
+import re
 import socket
 import struct
 import urllib.error
@@ -30,10 +31,37 @@ def parse_info(data):
         string()
     pos += 2  # Steam app ID
     players, maximum = struct.unpack_from('BB', data, pos)
-    pos += 7
-    version = string()
-    return {'name': name, 'players': players, 'maxPlayers': maximum,
-            'version': version or None}
+    pos += 7  # players, max, bots, type, environment, visibility, VAC
+    protocol_version = string()
+
+    game_version = None
+    keywords = None
+    if pos < len(data):
+        edf = data[pos]
+        pos += 1
+        if edf & 0x80:  # game port
+            pos += 2
+        if edf & 0x10:  # SteamID
+            pos += 8
+        if edf & 0x40:  # SourceTV port + name
+            pos += 2
+            string()
+        if edf & 0x20:  # keywords/tags; Valheim stores its build here
+            keywords = string()
+            match = re.search(r'(?<!\d)(\d+\.\d+\.\d+)(?!\d)', keywords)
+            if match:
+                game_version = match.group(1)
+        if edf & 0x01:  # 64-bit game ID
+            pos += 8
+
+    return {
+        'name': name,
+        'players': players,
+        'maxPlayers': maximum,
+        'version': game_version,
+        'protocolVersion': protocol_version or None,
+        'keywords': keywords,
+    }
 
 
 def query():
@@ -53,8 +81,14 @@ def query():
         except (OSError, ValueError, IndexError, struct.error):
             if attempt == 2:
                 # No response does not prove the game server itself is down.
-                return {'state': 'unreachable', 'players': None,
-                        'maxPlayers': None, 'version': None}
+                return {
+                    'state': 'unreachable',
+                    'players': None,
+                    'maxPlayers': None,
+                    'version': None,
+                    'protocolVersion': None,
+                    'keywords': None,
+                }
 
 
 def publish(snapshot):
