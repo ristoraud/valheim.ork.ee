@@ -33,21 +33,22 @@
         radial-gradient(ellipse 29% 15% at 64% 43%, #ffffffc7, transparent 85%),
         radial-gradient(ellipse 38% 21% at 87% 72%, #ffffffdc, transparent 88%);
       filter: blur(12px);
-      opacity: .96;
-      animation: mist-drift 28s ease-in-out infinite alternate;
+      --mist-opacity: .96;
+      opacity: var(--mist-opacity);
+      animation: mist-drift 32s linear infinite;
       will-change: transform;
     }
     .mist-layer:nth-child(2) {
       inset: -5% -65%;
-      opacity: .75;
-      animation-duration: 42s;
-      animation-delay: -19s;
-      animation-direction: alternate-reverse;
-      transform: scaleY(-1);
+      --mist-opacity: .75;
+      animation-duration: 46s;
+      animation-delay: -23s;
     }
     @keyframes mist-drift {
-      from { transform: translate3d(-22%, 5%, 0); }
-      to { transform: translate3d(22%, -7%, 0); }
+      0% { opacity: 0; transform: translate3d(-28%, 3%, 0); }
+      12% { opacity: var(--mist-opacity); }
+      88% { opacity: var(--mist-opacity); }
+      100% { opacity: 0; transform: translate3d(28%, -4%, 0); }
     }
     main { position: relative; z-index: 1; min-height: 100svh; display: grid; place-items: center; padding: 24px; }
     .enter {
