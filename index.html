@@ -16,16 +16,17 @@
     }
     main { min-height: 100svh; display: grid; place-items: center; padding: 24px; }
     .enter {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       min-width: 240px;
       min-height: 72px;
       padding: 18px 42px;
-      border: 2px solid #c5a364;
-      border-radius: 4px;
-      background: linear-gradient(180deg, #493621f5, #231b13fa);
-      box-shadow: 0 0 0 4px #1a130bb3, inset 0 0 18px #bb8b3433, 0 8px 30px #0009;
+      border: 2px solid #be9a58;
+      border-radius: 3px;
+      background: repeating-linear-gradient(135deg, #ffffff03 0 1px, transparent 1px 7px), linear-gradient(#363936, #181e1b);
+      box-shadow: 0 5px 0 #101510, 0 0 0 4px #6b592f, inset 0 0 0 5px #151b17, inset 0 0 25px #000;
       color: #ffe7ad;
       text-decoration: none;
       text-transform: uppercase;
@@ -34,9 +35,30 @@
       letter-spacing: .17em;
       text-indent: .17em;
       text-shadow: 0 2px 3px #000;
-      transition: filter .18s, transform .18s;
+      transition: filter .25s, transform .25s, box-shadow .35s;
     }
-    .enter:hover { filter: brightness(1.2); transform: translateY(-2px); }
+    .enter::before, .enter::after {
+      position: absolute; left: 0; width: 100%; text-align: center;
+      font: 13px Georgia, serif; letter-spacing: 14px; text-indent: 14px;
+      color: #a38b54; content: 'ᚠ ᚢ ᚦ ᚨ ᚱ';
+      transition: color .4s, text-shadow .4s;
+      pointer-events: none;
+    }
+    .enter::before { top: -23px; }
+    .enter::after { bottom: -24px; }
+    .enter:hover, .enter:focus-visible {
+      filter: brightness(1.14); transform: translateY(-3px);
+      box-shadow: 0 5px 0 #101510, 0 0 0 4px #ab8649, 0 0 30px #f1b54170, inset 0 0 22px #b68b3426;
+    }
+    .enter:hover::before, .enter:hover::after, .enter:focus-visible::before, .enter:focus-visible::after {
+      color: #ffe5a0; text-shadow: 0 0 9px #ffd45d;
+    }
+    .enter.departing { pointer-events: none; animation: dissolve .65s ease-in forwards; }
+    @keyframes dissolve {
+      0% { opacity: 1; filter: brightness(1.3) blur(0); }
+      35% { opacity: .9; filter: brightness(1.8) blur(1px); }
+      100% { opacity: 0; filter: brightness(1.4) blur(14px); transform: scale(1.12) translateY(-8px); }
+    }
     .enter:active { transform: translateY(1px); }
     .enter:focus-visible, summary:focus-visible { outline: 3px solid #fff2cb; outline-offset: 8px; }
     .help {
@@ -56,7 +78,11 @@
     summary { cursor: pointer; color: #e9d6ae; }
     .help p { margin: 10px 0 0; }
     code { color: #ffe7ad; user-select: all; overflow-wrap: anywhere; }
-    @media (prefers-reduced-motion: reduce) { .enter { transition: none; } }
+    .help a { color: #ffe7ad; }
+    @media (prefers-reduced-motion: reduce) {
+      .enter, .enter::before, .enter::after { transition: none; }
+      .enter.departing { animation: none; }
+    }
     @media (max-height: 450px) { .help { position: relative; left: auto; bottom: auto; transform: none; margin: 0 auto 18px; } }
   </style>
 </head>
@@ -67,8 +93,31 @@
   <details class="help" id="help">
     <summary>Steam ei avane?</summary>
     <p>Luba brauseril Steam avada. Arvutisse peavad olema paigaldatud Steam ja Valheim.</p>
+    <p><a href="steam://run/892970//+connect%2083.143.117.49:20414/">Ava Steam uuesti</a></p>
     <p>Või ava Valheim käsitsi, vali tegelane ning liitu serveriga aadressil <code>83.143.117.49:20414</code>. Kui küsitakse parooli, sisesta serveri parool.</p>
   </details>
+  <script>
+    const enter = document.querySelector('.enter');
+    let launching = false;
+    enter.addEventListener('click', (event) => {
+      if (event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
+      event.preventDefault();
+      if (launching) return;
+      launching = true;
+      enter.classList.add('departing');
+      enter.setAttribute('aria-disabled', 'true');
+      const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 650;
+      window.setTimeout(() => {
+        // The direct retry link remains available if a browser blocks delayed app launches.
+        window.setTimeout(() => {
+          enter.classList.remove('departing');
+          enter.removeAttribute('aria-disabled');
+          launching = false;
+        }, 2000);
+        window.location.href = enter.href;
+      }, delay);
+    });
+  </script>
 </body>
 </html>
 
