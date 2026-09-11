@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="et">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#171a16">
+  <title>Farlands — Valheim</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; min-height: 100%; }
+    body {
+      min-height: 100svh;
+      background: #171a16 url('kaart.webp') center center / cover no-repeat fixed;
+      color: #fff2d3;
+      font-family: Georgia, 'Times New Roman', serif;
+    }
+    main { min-height: 100svh; display: grid; place-items: center; padding: 24px; }
+    .enter {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 240px;
+      min-height: 72px;
+      padding: 18px 42px;
+      border: 2px solid #c5a364;
+      border-radius: 4px;
+      background: linear-gradient(180deg, #493621f5, #231b13fa);
+      box-shadow: 0 0 0 4px #1a130bb3, inset 0 0 18px #bb8b3433, 0 8px 30px #0009;
+      color: #ffe7ad;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: bold;
+      letter-spacing: .17em;
+      text-indent: .17em;
+      text-shadow: 0 2px 3px #000;
+      transition: filter .18s, transform .18s;
+    }
+    .enter:hover { filter: brightness(1.2); transform: translateY(-2px); }
+    .enter:active { transform: translateY(1px); }
+    .enter:focus-visible, summary:focus-visible { outline: 3px solid #fff2cb; outline-offset: 8px; }
+    .help {
+      position: fixed;
+      bottom: max(18px, env(safe-area-inset-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(440px, calc(100% - 32px));
+      padding: 12px 18px;
+      border: 1px solid #c5a36466;
+      border-radius: 5px;
+      background: #17140fe8;
+      text-align: center;
+      font: 14px/1.6 system-ui, sans-serif;
+      box-shadow: 0 3px 18px #0005;
+    }
+    summary { cursor: pointer; color: #e9d6ae; }
+    .help p { margin: 10px 0 0; }
+    code { color: #ffe7ad; user-select: all; overflow-wrap: anywhere; }
+    @media (prefers-reduced-motion: reduce) { .enter { transition: none; } }
+    @media (max-height: 450px) { .help { position: relative; left: auto; bottom: auto; transform: none; margin: 0 auto 18px; } }
+  </style>
+</head>
+<body>
+  <main aria-label="Farlands — Valheimi server">
+    <a class="enter" href="steam://run/892970//+connect%2083.143.117.49:20414/" aria-label="Sisene Farlandsi serverisse Steami kaudu">Sisene</a>
+  </main>
+  <details class="help" id="help">
+    <summary>Steam ei avane?</summary>
+    <p>Luba brauseril Steam avada. Arvutisse peavad olema paigaldatud Steam ja Valheim.</p>
+    <p>Või ava Valheim käsitsi, vali tegelane ning liitu serveriga aadressil <code>83.143.117.49:20414</code>. Kui küsitakse parooli, sisesta serveri parool.</p>
+  </details>
+</body>
+</html>
+
