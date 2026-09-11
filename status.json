@@ -1,9 +1,10 @@
 {
-  "state": "unreachable",
-  "players": null,
-  "maxPlayers": null,
-  "version": null,
-  "protocolVersion": null,
-  "keywords": null,
-  "checkedAt": "2026-09-11T15:43:53.091408+00:00"
+  "state": "online",
+  "name": "Farlands",
+  "players": 7,
+  "maxPlayers": 10,
+  "version": "1.0.12",
+  "protocolVersion": "1.0.0.0",
+  "keywords": "g=1.0.12,n=40,m=",
+  "checkedAt": "2026-09-11T18:41:00.895265+00:00"
 }
