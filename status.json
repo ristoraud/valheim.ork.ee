@@ -3,8 +3,8 @@
   "name": "Farlands",
   "players": 0,
   "maxPlayers": 10,
-  "version": "1.0.14",
+  "version": "1.0.15",
   "protocolVersion": "1.0.0.0",
-  "keywords": "g=1.0.14,n=40,m=40\\=1_0:2_0:3_0:4_0:5_0",
-  "checkedAt": "2026-09-18T23:36:45.846973+00:00"
+  "keywords": "g=1.0.15,n=40,m=40\\=1_0:2_0:3_0:4_0:5_0",
+  "checkedAt": "2026-09-19T01:35:06.780994+00:00"
 }
