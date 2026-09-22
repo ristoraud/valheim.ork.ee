@@ -1,10 +1,10 @@
 {
   "state": "online",
   "name": "Farlands",
-  "players": 1,
+  "players": 4,
   "maxPlayers": 10,
   "version": "1.0.15",
   "protocolVersion": "1.0.0.0",
   "keywords": "g=1.0.15,n=40,m=40\\=1_0:2_0:3_0:4_0:5_0",
-  "checkedAt": "2026-09-22T15:39:22.228092+00:00"
+  "checkedAt": "2026-09-22T19:14:53.250935+00:00"
 }
